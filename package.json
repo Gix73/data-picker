@@ -6,9 +6,11 @@
     "rollup": "rollup -c",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "lint": "eslint src/**/*.ts",
-    "pretty": "prettier --write 'src/**/*.ts'",
-    "prepare": "husky install"
+    "lint": "eslint --fix src/**/*.tsx",
+    "pretty": "prettier --write src/**/*.tsx",
+    "prepare": "husky install",
+    "precommit": "yarn lint-fix && yarn pretty",
+    "prepush": "yarn lint"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
@@ -23,9 +25,7 @@
     "@storybook/addon-interactions": "7.0.13",
     "@storybook/addon-links": "7.0.13",
     "@storybook/blocks": "7.0.13",
-    "@storybook/react": "7.0.13",
     "@storybook/react-webpack5": "7.0.13",
-    "@storybook/testing-library": "0.0.14-next.2",
     "@types/babel-core": "^6.25.7",
     "@types/react": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
@@ -35,6 +35,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
     "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
@@ -43,7 +44,6 @@
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
     "prop-types": "15.8.1",
-    "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^3.23.0",
     "rollup-plugin-dts": "^5.3.0",
@@ -52,6 +52,11 @@
     "storybook": "7.0.13",
     "tslib": "^2.5.2",
     "typescript": "*"
+  },
+  "dependencies": {
+    "@storybook/react": "7.0.13",
+    "@storybook/testing-library": "0.0.14-next.2",
+    "react": "^18.2.0"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

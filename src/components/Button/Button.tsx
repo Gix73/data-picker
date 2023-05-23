@@ -1,13 +1,14 @@
-import React from "react";
-import "./button.css" // 👈new addition
+import React, { type FC } from "react";
+import "./button.css"; // 👈new addition
 
-export interface ButtonProps{
-    label: string,
-    handleClick: () => void
+export interface ButtonProps {
+  label: string;
+  handleClick: () => void;
 }
-const Button = ({label, handleClick}: ButtonProps) => {
-    // btn class added 👇👇
-    return <button className="btn" onClick={handleClick}>{label}</button>
-}
+const Button: FC<ButtonProps> = ({ label, handleClick }: ButtonProps) => (
+  <button type="button" className="btn" onClick={handleClick}>
+    {label}
+  </button>
+);
 
 export default Button;
