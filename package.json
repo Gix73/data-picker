@@ -28,6 +28,7 @@
     "@storybook/react-webpack5": "7.0.13",
     "@types/babel-core": "^6.25.7",
     "@types/react": "^18.2.6",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.59.7",
     "eslint": "^8.0.1",
@@ -49,14 +50,15 @@
     "rollup-plugin-dts": "^5.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "storybook": "7.0.13",
     "tslib": "^2.5.2",
     "typescript": "*"
   },
   "dependencies": {
+    "styled-components": "^6.0.0-rc.1",
     "@storybook/react": "7.0.13",
     "@storybook/testing-library": "0.0.14-next.2",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "storybook": "7.0.13"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
