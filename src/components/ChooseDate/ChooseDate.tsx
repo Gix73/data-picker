@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { type FC } from "react";
 import { Container, Input } from "./styled";
 import { type ChooseDateProps } from "./types";
@@ -6,6 +6,10 @@ import { isDateValid } from "../../utils/helpers/calendarHelper";
 
 const ChooseDate: FC<ChooseDateProps> = ({ handleChange, date }) => {
   const [inputValue, setInputValue] = useState(date);
+
+  useEffect(() => {
+    setInputValue(date);
+  }, [date]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     let inputStr = e.target.value;

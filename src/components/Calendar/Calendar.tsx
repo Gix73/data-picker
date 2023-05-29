@@ -17,7 +17,7 @@ import { DefaultCalendar } from "../../utils/decorators/DefaultCalendar";
 import MonthGrid from "../MonthGrid/MonthGrid";
 import { CALENDAR_MONTHS, WEEK_DAYS } from "../../constants/date";
 
-const Calendar: FC<CalendarProps> = ({ date }) => {
+const Calendar: FC<CalendarProps> = ({ date, onChange }) => {
   const [calendar, setCalendar] = useState(new DefaultCalendar());
 
   const [dateState, setDateState] = useState({
@@ -88,10 +88,15 @@ const Calendar: FC<CalendarProps> = ({ date }) => {
       </CalendarControlsWrapper>
       <DaysWrapper>
         {Object.values(WEEK_DAYS).map((e, i) => {
-          return <DayCell>{e}</DayCell>;
+          return <DayCell key={e}>{e}</DayCell>;
         })}
       </DaysWrapper>
-      <MonthGrid dateArr={getCalendarDates()} />
+      <MonthGrid
+        date={date}
+        displayedDate={dateState.month}
+        dateArr={getCalendarDates()}
+        onClick={onChange}
+      />
     </CalendarWrapper>
   );
 };

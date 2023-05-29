@@ -1,5 +1,6 @@
 export interface CalendarProps {
   date: Date;
+  onChange: (newDate: Date) => void;
 }
 
 export interface IDateState {

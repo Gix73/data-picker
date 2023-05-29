@@ -8,7 +8,6 @@ const DatePicker: FC = () => {
   const [date, setDate] = useState(new Date());
 
   const handleChange = (newDate: Date): void => {
-    console.log(date);
     setDate(newDate);
   };
 
@@ -21,7 +20,7 @@ const DatePicker: FC = () => {
           handleChange={handleChange}
           date={date.toLocaleDateString("en-GB")}
         />
-        <Calendar date={date} />
+        <Calendar date={date} onChange={setDate} />
       </Wrapper>
     </>
   );
