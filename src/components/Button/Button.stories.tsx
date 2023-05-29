@@ -14,6 +14,7 @@ const Template: StoryFn<typeof Button> = (args) => <Button {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   label: "Primary",
+  color: "red",
   handleClick: () => {
     alert("primary");
   },
@@ -22,6 +23,7 @@ Primary.args = {
 export const Secondary = Template.bind({});
 Secondary.args = {
   label: "Secondary",
+  color: "red",
   handleClick: () => {
     alert("Secondary");
   },
