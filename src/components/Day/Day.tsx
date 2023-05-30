@@ -27,7 +27,7 @@ const Day: FC<DayPropsI> = ({
 }: DayPropsI) => {
   const isSelected = isSameDay(date, selectedDate);
   const isCurrentMonth = date.getMonth() === displayedDate - 1;
-
+  const isWeekday = date.getDay() === 0 || date.getDay() === 6;
   return (
     <DayWrapper
       onClick={() => {
@@ -38,6 +38,7 @@ const Day: FC<DayPropsI> = ({
       $textColor={textColor}
       $isSelected={isSelected}
       $isCurrentMonth={isCurrentMonth}
+      $isWeekday={isWeekday}
     >
       <Data>{date.getDate()}</Data>
     </DayWrapper>

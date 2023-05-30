@@ -8,6 +8,7 @@ interface Props {
   $textColor: string;
   $isSelected: boolean;
   $isCurrentMonth: boolean;
+  $isWeekday: boolean;
 }
 
 export const DayWrapper = styled.div<Props>`
@@ -23,7 +24,13 @@ export const DayWrapper = styled.div<Props>`
       return Colors.WHITE;
     }
     if (props.$isCurrentMonth) {
+      if (props.$isWeekday) {
+        return Colors.RED;
+      }
       return Colors.BLACK;
+    }
+    if (props.$isWeekday) {
+      return Colors.RED_LIGHT;
     }
     return Colors.LIGHT_GREY;
   }};
