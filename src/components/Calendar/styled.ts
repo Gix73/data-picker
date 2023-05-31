@@ -1,10 +1,11 @@
 import { styled } from "styled-components";
 
 export const CalendarWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10px;
+  /* padding: 10px; */
   border: 1px solid #e1e1e1;
   border-radius: 8px;
 `;
@@ -13,6 +14,7 @@ export const CalendarControlsWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 29px;
+  padding: 10px 10px 0;
 `;
 export const ImgWrapper = styled.div`
   width: 16px;
@@ -37,6 +39,7 @@ export const DaysWrapper = styled.div`
   width: 100%;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
+  padding: 0px 10px;
 `;
 
 export const DayCell = styled.div`

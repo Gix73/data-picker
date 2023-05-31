@@ -1,6 +1,7 @@
 import React, { type FC } from "react";
 import { Data, DayWrapper } from "./styled";
 import { isSameDay } from "../../utils/helpers/calendarHelper";
+import ToDo from "../ToDo/ToDo";
 
 export interface DayPropsI {
   date: Date;
@@ -40,8 +41,14 @@ const Day: FC<DayPropsI> = ({
     let isValid;
     if (minDate && maxDate) {
       isValid =
-        date.getTime() >= minDate.getTime() &&
-        date.getTime() <= maxDate.getTime();
+        date.getTime() >=
+          (typeof minDate === "object"
+            ? minDate.getTime()
+            : new Date(minDate).getTime()) &&
+        date.getTime() <=
+          (typeof maxDate === "object"
+            ? maxDate.getTime()
+            : new Date(maxDate).getTime());
     }
     if (isValid) {
       onClick(date);
@@ -58,6 +65,7 @@ const Day: FC<DayPropsI> = ({
       $isCurrentMonth={isCurrentMonth}
       $isWeekday={isWeekday}
     >
+      {/* <ToDo /> */}
       <Data>{date.getDate()}</Data>
     </DayWrapper>
   );

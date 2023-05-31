@@ -14,7 +14,7 @@ const Template: StoryFn<typeof DatePicker> = (args) => <DatePicker {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   minDate: new Date(2023, 4, 1),
-  maxDate: new Date(2023, 7, 7),
+  maxDate: new Date(2023, 5, 20),
   showWeekends: true,
 };
 

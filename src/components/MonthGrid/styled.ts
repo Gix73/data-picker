@@ -5,4 +5,5 @@ export const Grid = styled.div`
   width: 100%;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
+  padding: 0 10px 10px;
 `;

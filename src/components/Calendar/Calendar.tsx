@@ -64,6 +64,16 @@ const Calendar: FC<CalendarProps> = ({
 
   const handlePrevious = (): void => {
     const prevDate = calendar.getPrevious(dateState.month, dateState.year);
+    if (minDate) {
+      if (
+        prevDate.month <=
+        (typeof minDate === "object"
+          ? minDate.getMonth()
+          : new Date(minDate).getMonth())
+      ) {
+        return;
+      }
+    }
     setDateState({
       current: dateState.current,
       month: prevDate.month,
@@ -73,6 +83,17 @@ const Calendar: FC<CalendarProps> = ({
 
   const handleNext = (): void => {
     const nextDate = calendar.getNext(dateState.month, dateState.year);
+
+    if (maxDate) {
+      if (
+        nextDate.month - 1 >
+        (typeof maxDate === "object"
+          ? maxDate.getMonth()
+          : new Date(maxDate).getMonth())
+      ) {
+        return;
+      }
+    }
     setDateState({
       current: dateState.current,
       month: nextDate.month,
@@ -107,12 +128,7 @@ const Calendar: FC<CalendarProps> = ({
           <Img src={next} alt="next" />
         </ImgWrapper>
       </CalendarControlsWrapper>
-      <DaysWrapper>
-        {/* {Object.values(WEEK_DAYS).map((e, i) => {
-          return <DayCell key={e}>{e}</DayCell>;
-        })} */}
-        {getDaysOfTheWeek()}
-      </DaysWrapper>
+      <DaysWrapper>{getDaysOfTheWeek()}</DaysWrapper>
       <MonthGrid
         date={date}
         displayedDate={dateState.month}

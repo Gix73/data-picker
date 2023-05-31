@@ -62,8 +62,7 @@ export class DefaultCalendar implements ICalendar {
       const day = index + 1;
       return [nextData.year, zeroPad(nextData.month, 2), zeroPad(day, 2)];
     });
-    console.log(prevMonthDays);
-    console.log(prevMonthDates);
+
     return [...prevMonthDates, ...thisMonthDates, ...nextMonthDates];
   }
 }
