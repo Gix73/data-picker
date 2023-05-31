@@ -23,6 +23,7 @@ const Calendar: FC<CalendarProps> = ({
   minDate,
   maxDate,
   showWeekends,
+  weekStart,
 }) => {
   const [calendar, setCalendar] = useState(new DefaultCalendar());
 
@@ -79,6 +80,20 @@ const Calendar: FC<CalendarProps> = ({
     });
   };
 
+  const getDaysOfTheWeek = (): React.JSX.Element[] => {
+    const arr = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+    if (weekStart === "mo") {
+      calendar.weekStart = "mo";
+      return arr.map((e, i) => {
+        return <DayCell key={e}>{e}</DayCell>;
+      });
+    }
+    calendar.weekStart = "su";
+    return Object.values(WEEK_DAYS).map((e, i) => {
+      return <DayCell key={e}>{e}</DayCell>;
+    });
+  };
+
   return (
     <CalendarWrapper>
       <CalendarControlsWrapper>
@@ -93,9 +108,10 @@ const Calendar: FC<CalendarProps> = ({
         </ImgWrapper>
       </CalendarControlsWrapper>
       <DaysWrapper>
-        {Object.values(WEEK_DAYS).map((e, i) => {
+        {/* {Object.values(WEEK_DAYS).map((e, i) => {
           return <DayCell key={e}>{e}</DayCell>;
-        })}
+        })} */}
+        {getDaysOfTheWeek()}
       </DaysWrapper>
       <MonthGrid
         date={date}

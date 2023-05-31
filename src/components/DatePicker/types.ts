@@ -3,4 +3,5 @@ export interface DatePickerProps {
   minDate?: Date;
   maxDate?: Date;
   showWeekends?: boolean;
+  weekStart?: "su" | "mo";
 }

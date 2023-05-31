@@ -12,6 +12,8 @@ interface State {
 }
 
 export class DefaultCalendar implements ICalendar {
+  weekStart?: "su" | "mo";
+
   public getPrevious(month: number, year: number): State {
     const prevMonth = month > 1 ? month - 1 : 12;
     const prevMonthYear = month > 1 ? year : year - 1;
@@ -31,7 +33,13 @@ export class DefaultCalendar implements ICalendar {
     const monthDays = getNumberOfMonthDays(month, year);
     const monthFirstDay = getMonthFirstDay(month, year);
 
-    const daysFromPrevMonth = monthFirstDay - 1;
+    let daysFromPrevMonth: number;
+    if (this.weekStart === "mo") {
+      daysFromPrevMonth = monthFirstDay - 2;
+    } else {
+      daysFromPrevMonth = monthFirstDay - 1;
+    }
+
     const daysFromNextMonth =
       CALENDAR_WEEKS * 7 - (daysFromPrevMonth + monthDays);
 
@@ -54,7 +62,8 @@ export class DefaultCalendar implements ICalendar {
       const day = index + 1;
       return [nextData.year, zeroPad(nextData.month, 2), zeroPad(day, 2)];
     });
-
+    console.log(prevMonthDays);
+    console.log(prevMonthDates);
     return [...prevMonthDates, ...thisMonthDates, ...nextMonthDates];
   }
 }
