@@ -10,6 +10,8 @@ const MonthGrid: FC<MonthGridProps> = ({
   onClick,
   date,
   displayedDate,
+  minDate,
+  maxDate,
 }) => {
   const monthDateArr = useMemo(
     () => dateArr.map((e, i) => new Date(e.join("/"))),
@@ -25,9 +27,11 @@ const MonthGrid: FC<MonthGridProps> = ({
             textColor={Colors.BLACK}
             bgColor={Colors.WHITE}
             borderRadius={Borders.DEFAULT}
-            handleClick={onClick}
+            onClick={onClick}
             selectedDate={date}
             displayedDate={displayedDate}
+            minDate={minDate}
+            maxDate={maxDate}
             key={e.toDateString()}
           />
         );

@@ -3,8 +3,9 @@ import { Span, Wrapper } from "./styled";
 import { Global } from "../../styles/globalStyled";
 import ChooseDate from "../ChooseDate/ChooseDate";
 import Calendar from "../Calendar/Calendar";
+import { type DatePickerProps } from "./types";
 
-const DatePicker: FC = () => {
+const DatePicker: FC<DatePickerProps> = ({ type, minDate, maxDate }) => {
   const [date, setDate] = useState(new Date());
 
   const handleChange = (newDate: Date): void => {
@@ -19,8 +20,15 @@ const DatePicker: FC = () => {
         <ChooseDate
           handleChange={handleChange}
           date={date.toLocaleDateString("en-GB")}
+          minDate={minDate}
+          maxDate={maxDate}
         />
-        <Calendar date={date} onChange={setDate} />
+        <Calendar
+          date={date}
+          onChange={setDate}
+          minDate={minDate}
+          maxDate={maxDate}
+        />
       </Wrapper>
     </>
   );

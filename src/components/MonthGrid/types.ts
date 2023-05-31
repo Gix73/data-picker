@@ -3,4 +3,6 @@ export interface MonthGridProps {
   onClick: (newDate: Date) => void;
   date: Date;
   displayedDate: number;
+  minDate?: Date;
+  maxDate?: Date;
 }

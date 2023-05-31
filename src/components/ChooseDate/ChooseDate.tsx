@@ -4,7 +4,12 @@ import { Container, Input } from "./styled";
 import { type ChooseDateProps } from "./types";
 import { isDateValid } from "../../utils/helpers/calendarHelper";
 
-const ChooseDate: FC<ChooseDateProps> = ({ handleChange, date }) => {
+const ChooseDate: FC<ChooseDateProps> = ({
+  handleChange,
+  date,
+  minDate,
+  maxDate,
+}) => {
   const [inputValue, setInputValue] = useState(date);
 
   useEffect(() => {
@@ -27,7 +32,18 @@ const ChooseDate: FC<ChooseDateProps> = ({ handleChange, date }) => {
 
     if (isDateValid(inputStr)) {
       const newDate = inputStr.replace(/(\d+[/])(\d+[/])/, "$2$1");
-      handleChange(new Date(newDate));
+      const updatedDate = new Date(newDate);
+      let isValid;
+      if (minDate && maxDate) {
+        isValid =
+          updatedDate.getTime() >= minDate.getTime() &&
+          updatedDate.getTime() <= maxDate.getTime();
+      }
+      if (isValid) {
+        handleChange(new Date(newDate));
+      } else {
+        console.log("date is not valid");
+      }
     }
   };
 

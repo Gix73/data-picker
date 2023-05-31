@@ -11,7 +11,9 @@ export interface DayPropsI {
   displayedDate: number;
   width?: string;
   height?: string;
-  handleClick: (newDate: Date) => void;
+  minDate?: Date;
+  maxDate?: Date;
+  onClick: (newDate: Date) => void;
 }
 
 const Day: FC<DayPropsI> = ({
@@ -23,16 +25,29 @@ const Day: FC<DayPropsI> = ({
   displayedDate,
   width,
   height,
-  handleClick,
+  minDate,
+  maxDate,
+  onClick,
 }: DayPropsI) => {
   const isSelected = isSameDay(date, selectedDate);
   const isCurrentMonth = date.getMonth() === displayedDate - 1;
   const isWeekday = date.getDay() === 0 || date.getDay() === 6;
+
+  const handleClick = (): void => {
+    let isValid;
+    if (minDate && maxDate) {
+      isValid =
+        date.getTime() >= minDate.getTime() &&
+        date.getTime() <= maxDate.getTime();
+    }
+    if (isValid) {
+      onClick(date);
+    }
+  };
+
   return (
     <DayWrapper
-      onClick={() => {
-        handleClick(date);
-      }}
+      onClick={handleClick}
       $bgColor={bgColor}
       $borderRadius={borderRadius}
       $textColor={textColor}
