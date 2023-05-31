@@ -15,7 +15,7 @@ export const Default = Template.bind({});
 Default.args = {
   minDate: new Date(2023, 4, 1),
   maxDate: new Date(2023, 7, 7),
-  showWeekends: false,
+  showWeekends: true,
 };
 
 export default story;

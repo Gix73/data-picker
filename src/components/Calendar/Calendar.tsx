@@ -17,7 +17,13 @@ import { DefaultCalendar } from "../../utils/decorators/DefaultCalendar";
 import MonthGrid from "../MonthGrid/MonthGrid";
 import { CALENDAR_MONTHS, WEEK_DAYS } from "../../constants/date";
 
-const Calendar: FC<CalendarProps> = ({ date, onChange, minDate, maxDate }) => {
+const Calendar: FC<CalendarProps> = ({
+  date,
+  onChange,
+  minDate,
+  maxDate,
+  showWeekends,
+}) => {
   const [calendar, setCalendar] = useState(new DefaultCalendar());
 
   const [dateState, setDateState] = useState({
@@ -98,6 +104,7 @@ const Calendar: FC<CalendarProps> = ({ date, onChange, minDate, maxDate }) => {
         onClick={onChange}
         minDate={minDate}
         maxDate={maxDate}
+        showWeekends={showWeekends}
       />
     </CalendarWrapper>
   );

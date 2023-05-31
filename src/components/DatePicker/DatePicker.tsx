@@ -5,7 +5,12 @@ import ChooseDate from "../ChooseDate/ChooseDate";
 import Calendar from "../Calendar/Calendar";
 import { type DatePickerProps } from "./types";
 
-const DatePicker: FC<DatePickerProps> = ({ type, minDate, maxDate }) => {
+const DatePicker: FC<DatePickerProps> = ({
+  type,
+  minDate,
+  maxDate,
+  showWeekends,
+}) => {
   const [date, setDate] = useState(new Date());
 
   const handleChange = (newDate: Date): void => {
@@ -28,6 +33,7 @@ const DatePicker: FC<DatePickerProps> = ({ type, minDate, maxDate }) => {
           onChange={setDate}
           minDate={minDate}
           maxDate={maxDate}
+          showWeekends={showWeekends}
         />
       </Wrapper>
     </>

@@ -5,4 +5,5 @@ export interface MonthGridProps {
   displayedDate: number;
   minDate?: Date;
   maxDate?: Date;
+  showWeekends?: boolean;
 }

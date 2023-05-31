@@ -13,6 +13,7 @@ export interface DayPropsI {
   height?: string;
   minDate?: Date;
   maxDate?: Date;
+  showWeekends?: boolean;
   onClick: (newDate: Date) => void;
 }
 
@@ -27,11 +28,13 @@ const Day: FC<DayPropsI> = ({
   height,
   minDate,
   maxDate,
+  showWeekends,
   onClick,
 }: DayPropsI) => {
   const isSelected = isSameDay(date, selectedDate);
   const isCurrentMonth = date.getMonth() === displayedDate - 1;
-  const isWeekday = date.getDay() === 0 || date.getDay() === 6;
+  const isWeekday =
+    (date.getDay() === 0 || date.getDay() === 6) && showWeekends;
 
   const handleClick = (): void => {
     let isValid;
