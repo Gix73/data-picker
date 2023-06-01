@@ -68,9 +68,13 @@ const Calendar: FC<CalendarProps> = ({
     if (minDate) {
       if (
         prevDate.month <=
-        (typeof minDate === "object"
-          ? minDate.getMonth()
-          : new Date(minDate).getMonth())
+          (typeof minDate === "object"
+            ? minDate.getMonth()
+            : new Date(minDate).getMonth()) &&
+        prevDate.year <=
+          (typeof minDate === "object"
+            ? minDate.getFullYear()
+            : new Date(minDate).getFullYear())
       ) {
         return;
       }
@@ -88,9 +92,13 @@ const Calendar: FC<CalendarProps> = ({
     if (maxDate) {
       if (
         nextDate.month - 1 >
-        (typeof maxDate === "object"
-          ? maxDate.getMonth()
-          : new Date(maxDate).getMonth())
+          (typeof maxDate === "object"
+            ? maxDate.getMonth()
+            : new Date(maxDate).getMonth()) &&
+        nextDate.year >=
+          (typeof maxDate === "object"
+            ? maxDate.getFullYear()
+            : new Date(maxDate).getFullYear())
       ) {
         return;
       }

@@ -1,6 +1,10 @@
 import React, { useState, type FC, memo } from "react";
 import { Data, DayWrapper } from "./styled";
-import { isSameDay } from "../../utils/helpers/calendarHelper";
+import {
+  isDateGreater,
+  isDateLess,
+  isSameDay,
+} from "../../utils/helpers/calendarHelper";
 import ToDo from "../ToDo/ToDo";
 import { type DayPropsI } from "./types";
 import { getItemFromLocalStorage } from "../../utils/helpers/localStorage";
@@ -36,19 +40,10 @@ const Day: FC<DayPropsI> = ({
   const handleClick = (): void => {
     let isValid;
     if (minDate && maxDate) {
-      isValid =
-        date.getTime() >=
-          (typeof minDate === "object"
-            ? minDate.getTime()
-            : new Date(minDate).getTime()) &&
-        date.getTime() <=
-          (typeof maxDate === "object"
-            ? maxDate.getTime()
-            : new Date(maxDate).getTime());
+      isValid = isDateGreater(date, minDate) && isDateLess(date, maxDate);
     }
     if (isValid) {
       onClick(date);
-      // handlePopup();
     }
   };
 

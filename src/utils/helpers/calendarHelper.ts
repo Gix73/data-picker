@@ -68,3 +68,19 @@ export function isDateValid(inputStr: string): boolean {
   }
   return true;
 }
+
+export function isDateLess(firstDate: Date, secondDate: Date): boolean {
+  const fDate = typeof firstDate === "object" ? firstDate : new Date(firstDate);
+  const sDate =
+    typeof secondDate === "object" ? secondDate : new Date(secondDate);
+
+  return fDate.getTime() <= sDate.getTime();
+}
+
+export function isDateGreater(firstDate: Date, secondDate: Date): boolean {
+  const fDate = typeof firstDate === "object" ? firstDate : new Date(firstDate);
+  const sDate =
+    typeof secondDate === "object" ? secondDate : new Date(secondDate);
+
+  return fDate.getTime() >= sDate.getTime();
+}
