@@ -1,22 +1,10 @@
-import React, { type FC } from "react";
+import React, { useState, type FC, memo } from "react";
 import { Data, DayWrapper } from "./styled";
 import { isSameDay } from "../../utils/helpers/calendarHelper";
 import ToDo from "../ToDo/ToDo";
-
-export interface DayPropsI {
-  date: Date;
-  textColor: string;
-  bgColor: string;
-  borderRadius: string;
-  selectedDate: Date;
-  displayedDate: number;
-  width?: string;
-  height?: string;
-  minDate?: Date;
-  maxDate?: Date;
-  showWeekends?: boolean;
-  onClick: (newDate: Date) => void;
-}
+import { type DayPropsI } from "./types";
+import { getItemFromLocalStorage } from "../../utils/helpers/localStorage";
+import { type ToDoState } from "../ToDo/types";
 
 const Day: FC<DayPropsI> = ({
   date,
@@ -32,10 +20,18 @@ const Day: FC<DayPropsI> = ({
   showWeekends,
   onClick,
 }: DayPropsI) => {
+  const [showPopup, setShowPopup] = useState(false);
+  const haveTodo = getItemFromLocalStorage(
+    String(date.getTime())
+  ) as ToDoState[];
   const isSelected = isSameDay(date, selectedDate);
   const isCurrentMonth = date.getMonth() === displayedDate - 1;
   const isWeekday =
     (date.getDay() === 0 || date.getDay() === 6) && showWeekends;
+
+  const handlePopup = (): void => {
+    setShowPopup(!showPopup);
+  };
 
   const handleClick = (): void => {
     let isValid;
@@ -52,22 +48,27 @@ const Day: FC<DayPropsI> = ({
     }
     if (isValid) {
       onClick(date);
+      // handlePopup();
     }
   };
 
   return (
-    <DayWrapper
-      onClick={handleClick}
-      $bgColor={bgColor}
-      $borderRadius={borderRadius}
-      $textColor={textColor}
-      $isSelected={isSelected}
-      $isCurrentMonth={isCurrentMonth}
-      $isWeekday={isWeekday}
-    >
-      {/* <ToDo /> */}
-      <Data>{date.getDate()}</Data>
-    </DayWrapper>
+    <>
+      <DayWrapper
+        onClick={handleClick}
+        onDoubleClick={handlePopup}
+        $bgColor={bgColor}
+        $borderRadius={borderRadius}
+        $textColor={textColor}
+        $isSelected={isSelected}
+        $isCurrentMonth={isCurrentMonth}
+        $isWeekday={isWeekday}
+        $haveTodo={haveTodo.length > 0}
+      >
+        <Data>{date.getDate()}</Data>
+      </DayWrapper>
+      {showPopup && <ToDo date={date} onShow={handlePopup} />}
+    </>
   );
 };
 

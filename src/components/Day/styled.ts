@@ -9,6 +9,7 @@ interface Props {
   $isSelected: boolean;
   $isCurrentMonth: boolean;
   $isWeekday: boolean | undefined;
+  $haveTodo: boolean;
 }
 
 export const DayWrapper = styled.div<Props>`
@@ -38,6 +39,7 @@ export const DayWrapper = styled.div<Props>`
   width: 100%;
   height: 32px;
   font-size: 13px;
+  border: ${(props) => (props.$haveTodo ? "1px solid" : "none")};
   border-radius: ${Borders.ROUNDED};
   cursor: pointer;
 `;

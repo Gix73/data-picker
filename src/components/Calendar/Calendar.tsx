@@ -64,6 +64,7 @@ const Calendar: FC<CalendarProps> = ({
 
   const handlePrevious = (): void => {
     const prevDate = calendar.getPrevious(dateState.month, dateState.year);
+
     if (minDate) {
       if (
         prevDate.month <=

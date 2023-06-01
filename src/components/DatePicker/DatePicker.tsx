@@ -15,6 +15,9 @@ const DatePicker: FC<DatePickerProps> = ({
   const [date, setDate] = useState(new Date());
 
   const handleChange = (newDate: Date): void => {
+    if (newDate.getTime() === date.getTime()) {
+      return;
+    }
     setDate(newDate);
   };
 
@@ -31,7 +34,7 @@ const DatePicker: FC<DatePickerProps> = ({
         />
         <Calendar
           date={date}
-          onChange={setDate}
+          onChange={handleChange}
           minDate={minDate}
           maxDate={maxDate}
           showWeekends={showWeekends}

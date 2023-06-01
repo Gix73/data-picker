@@ -36,8 +36,14 @@ const ChooseDate: FC<ChooseDateProps> = ({
       let isValid;
       if (minDate && maxDate) {
         isValid =
-          updatedDate.getTime() >= minDate.getTime() &&
-          updatedDate.getTime() <= maxDate.getTime();
+          updatedDate.getTime() >=
+            (typeof minDate === "object"
+              ? minDate.getTime()
+              : new Date(minDate).getTime()) &&
+          updatedDate.getTime() <=
+            (typeof maxDate === "object"
+              ? maxDate.getTime()
+              : new Date(maxDate).getTime());
       }
       if (isValid) {
         handleChange(new Date(newDate));
