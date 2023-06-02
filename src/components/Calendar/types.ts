@@ -1,3 +1,4 @@
+import { type ISettings } from "../../types/types";
 import { type DatePickerProps } from "../DatePicker/types";
 
 export interface CalendarProps extends DatePickerProps {

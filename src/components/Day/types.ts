@@ -7,8 +7,8 @@ export interface DayPropsI {
   displayedDate: number;
   width?: string;
   height?: string;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   showWeekends?: boolean;
   onClick: (newDate: Date) => void;
 }

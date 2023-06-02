@@ -11,6 +11,7 @@ const DatePicker: FC<DatePickerProps> = ({
   maxDate,
   showWeekends,
   weekStart,
+  withTodo,
 }) => {
   const [date, setDate] = useState(new Date());
 
@@ -39,6 +40,8 @@ const DatePicker: FC<DatePickerProps> = ({
           maxDate={maxDate}
           showWeekends={showWeekends}
           weekStart={weekStart}
+          withTodo={withTodo}
+          type={type}
         />
       </Wrapper>
     </>

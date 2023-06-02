@@ -1,4 +1,4 @@
-import React, { useState, type FC, memo } from "react";
+import React, { useState, type FC } from "react";
 import { Data, DayWrapper } from "./styled";
 import {
   isDateGreater,

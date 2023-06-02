@@ -16,6 +16,7 @@ import { isDate } from "../../utils/helpers/calendarHelper";
 import { DefaultCalendar } from "../../utils/decorators/DefaultCalendar";
 import MonthGrid from "../MonthGrid/MonthGrid";
 import { CALENDAR_MONTHS, WEEK_DAYS } from "../../constants/date";
+import { SettingsDecorator } from "../../utils/decorators/SettingsDecorator";
 
 const Calendar: FC<CalendarProps> = ({
   date,
@@ -24,6 +25,8 @@ const Calendar: FC<CalendarProps> = ({
   maxDate,
   showWeekends,
   weekStart,
+  withTodo,
+  type,
 }) => {
   const [calendar, setCalendar] = useState(new DefaultCalendar());
 
@@ -32,6 +35,18 @@ const Calendar: FC<CalendarProps> = ({
     month: 0,
     year: 0,
   });
+
+  useEffect(() => {
+    const decoratedCalendar = new SettingsDecorator().setCalendarSettings({
+      minDate,
+      maxDate,
+      showWeekends,
+      weekStart,
+      withTodo,
+      type,
+    });
+    setCalendar(decoratedCalendar);
+  }, [minDate, maxDate, showWeekends, weekStart, withTodo, type]);
 
   const addDateToState = (currentDate: Date): void => {
     const isDateObject = isDate(currentDate);
@@ -51,7 +66,12 @@ const Calendar: FC<CalendarProps> = ({
     const { current, month, year } = dateState;
     const calendarMonth = month || +current.getMonth() + 1;
     const calendarYear = year || current.getFullYear();
-    return calendar.getDateArr(calendarMonth, calendarYear);
+    return calendar.getDateArr({
+      month: calendarMonth,
+      year: calendarYear,
+      date,
+    });
+    // return calendar.getDateArr(calendarMonth, calendarYear);
   };
 
   const monthname = useMemo(
@@ -63,7 +83,11 @@ const Calendar: FC<CalendarProps> = ({
   );
 
   const handlePrevious = (): void => {
-    const prevDate = calendar.getPrevious(dateState.month, dateState.year);
+    const prevDate = calendar.getPrevious({
+      month: dateState.month,
+      year: dateState.year,
+      date,
+    });
 
     if (minDate) {
       if (
@@ -87,7 +111,11 @@ const Calendar: FC<CalendarProps> = ({
   };
 
   const handleNext = (): void => {
-    const nextDate = calendar.getNext(dateState.month, dateState.year);
+    const nextDate = calendar.getNext({
+      month: dateState.month,
+      year: dateState.year,
+      date,
+    });
 
     if (maxDate) {
       if (
@@ -112,13 +140,12 @@ const Calendar: FC<CalendarProps> = ({
 
   const getDaysOfTheWeek = (): React.JSX.Element[] => {
     const arr = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
-    if (weekStart === "mo") {
-      calendar.weekStart = "mo";
+    if (calendar.weekStart === "mo") {
       return arr.map((e, i) => {
         return <DayCell key={e}>{e}</DayCell>;
       });
     }
-    calendar.weekStart = "su";
+
     return Object.values(WEEK_DAYS).map((e, i) => {
       return <DayCell key={e}>{e}</DayCell>;
     });
@@ -143,9 +170,9 @@ const Calendar: FC<CalendarProps> = ({
         displayedDate={dateState.month}
         dateArr={getCalendarDates()}
         onClick={onChange}
-        minDate={minDate}
-        maxDate={maxDate}
-        showWeekends={showWeekends}
+        minDate={calendar.minDate}
+        maxDate={calendar.maxDate}
+        showWeekends={calendar.showWeekends}
       />
     </CalendarWrapper>
   );

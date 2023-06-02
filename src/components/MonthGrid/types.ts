@@ -3,7 +3,7 @@ export interface MonthGridProps {
   onClick: (newDate: Date) => void;
   date: Date;
   displayedDate: number;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   showWeekends?: boolean;
 }

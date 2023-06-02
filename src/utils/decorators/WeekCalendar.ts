@@ -5,17 +5,9 @@ import {
   getNumberOfMonthDays,
   zeroPad,
 } from "../helpers/calendarHelper";
+import { type State } from "./DefaultCalendar";
 
-export interface State {
-  month: number;
-  year: number;
-  week?: number;
-  date?: Date;
-}
-
-export class DefaultCalendar implements ICalendar {
-  public type?: "month" | "week" | "year" = "month";
-
+export class WeekCalendar implements ICalendar {
   public weekStart?: "su" | "mo" = "su";
 
   public withTodo?: boolean = false;
@@ -38,9 +30,23 @@ export class DefaultCalendar implements ICalendar {
     return { month: nextMonth, year: nextMonthYear };
   }
 
-  public getDateArr({ month, year }: State): Array<Array<string | number>> {
-    const monthDays = getNumberOfMonthDays(month, year);
+  public getDateArr({
+    month,
+    year,
+    date,
+  }: State): Array<Array<string | number>> {
+    // const monthDays = getNumberOfMonthDays(month, year);
+    const monthDays = 7;
     const monthFirstDay = getMonthFirstDay(month, year);
+    console.log(`month  ${month}`);
+    console.log(`mfDay  ${monthFirstDay}`);
+    console.log(`numofdays ${monthDays}`);
+    console.log(date);
+
+    if (date) {
+      const currentWeek = Math.ceil((date.getDate() + monthFirstDay) / 7);
+      console.log(`week  ${currentWeek}`);
+    }
 
     let daysFromPrevMonth: number;
     if (this.weekStart === "mo") {
@@ -49,12 +55,13 @@ export class DefaultCalendar implements ICalendar {
       daysFromPrevMonth = monthFirstDay - 1;
     }
 
-    const daysFromNextMonth =
-      CALENDAR_WEEKS * 7 - (daysFromPrevMonth + monthDays);
+    const daysFromNextMonth = 0;
+    // CALENDAR_WEEKS * 7 - (daysFromPrevMonth + monthDays);
 
     const prevData = this.getPrevious({ month, year });
     const nextData = this.getNext({ month, year });
 
+    // const prevMonthDays = getNumberOfMonthDays(prevData.month, prevData.year);
     const prevMonthDays = getNumberOfMonthDays(prevData.month, prevData.year);
 
     const prevMonthDates = [...new Array(daysFromPrevMonth)].map((n, index) => {

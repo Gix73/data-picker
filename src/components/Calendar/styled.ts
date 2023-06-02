@@ -17,6 +17,7 @@ export const CalendarControlsWrapper = styled.div`
   padding: 10px 10px 0;
 `;
 export const ImgWrapper = styled.div`
+  cursor: pointer;
   width: 16px;
   height: 16px;
 `;
