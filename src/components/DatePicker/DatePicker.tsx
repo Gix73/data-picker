@@ -1,4 +1,4 @@
-import React, { useState, type FC } from "react";
+import React, { useState, type FC, useEffect } from "react";
 import { Span, Wrapper } from "./styled";
 import { Global } from "../../styles/globalStyled";
 import ChooseDate from "../ChooseDate/ChooseDate";
@@ -34,7 +34,7 @@ const DatePicker: FC<DatePickerProps> = ({
           maxDate={maxDate}
         />
         <Calendar
-          date={date}
+          currentDate={date}
           onChange={handleChange}
           minDate={minDate}
           maxDate={maxDate}

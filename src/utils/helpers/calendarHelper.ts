@@ -84,3 +84,11 @@ export function isDateGreater(firstDate: Date, secondDate: Date): boolean {
 
   return fDate.getTime() >= sDate.getTime();
 }
+
+export function getCurrentWeekNumber(
+  date: Date,
+  month: number,
+  year: number
+): number {
+  return Math.ceil((date.getDate() + getMonthFirstDay(month, year)) / 7);
+}

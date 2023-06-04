@@ -19,7 +19,7 @@ import { CALENDAR_MONTHS, WEEK_DAYS } from "../../constants/date";
 import { SettingsDecorator } from "../../utils/decorators/SettingsDecorator";
 
 const Calendar: FC<CalendarProps> = ({
-  date,
+  currentDate,
   onChange,
   minDate,
   maxDate,
@@ -28,13 +28,18 @@ const Calendar: FC<CalendarProps> = ({
   withTodo,
   type,
 }) => {
-  const [calendar, setCalendar] = useState(new DefaultCalendar());
+  const [calendar, setCalendar] = useState(
+    new SettingsDecorator().setCalendarSettings({
+      minDate,
+      maxDate,
+      showWeekends,
+      weekStart,
+      withTodo,
+      type,
+    })
+  );
 
-  const [dateState, setDateState] = useState({
-    current: date,
-    month: 0,
-    year: 0,
-  });
+  const [dateState, setDateState] = useState(calendar.getDateInfo(currentDate));
 
   useEffect(() => {
     const decoratedCalendar = new SettingsDecorator().setCalendarSettings({
@@ -48,31 +53,22 @@ const Calendar: FC<CalendarProps> = ({
     setCalendar(decoratedCalendar);
   }, [minDate, maxDate, showWeekends, weekStart, withTodo, type]);
 
-  const addDateToState = (currentDate: Date): void => {
-    const isDateObject = isDate(currentDate);
-    const curDate = isDateObject ? currentDate : new Date();
-    setDateState({
-      current: curDate,
-      month: +curDate.getMonth() + 1,
-      year: curDate.getFullYear(),
-    });
-  };
+  // const addDateToState = (current: Date): void => {
+  //   const isDateObject = isDate(current);
+  //   const curDate = isDateObject ? current : new Date();
+  //   setDateState({
+  //     date: curDate,
+  //     month: +curDate.getMonth() + 1,
+  //     year: curDate.getFullYear(),
+  //   });
+  // };
 
-  useEffect(() => {
-    addDateToState(date);
-  }, [date]);
-
-  const getCalendarDates = (): Array<Array<string | number>> => {
-    const { current, month, year } = dateState;
-    const calendarMonth = month || +current.getMonth() + 1;
-    const calendarYear = year || current.getFullYear();
-    return calendar.getDateArr({
-      month: calendarMonth,
-      year: calendarYear,
-      date,
-    });
-    // return calendar.getDateArr(calendarMonth, calendarYear);
-  };
+  // useEffect(() => {
+  //   setDateState({
+  //     month: currentDate.getMonth() + 1,
+  //     year: currentDate.getFullYear(),
+  //   });
+  // }, [currentDate]);
 
   const monthname = useMemo(
     () =>
@@ -83,11 +79,7 @@ const Calendar: FC<CalendarProps> = ({
   );
 
   const handlePrevious = (): void => {
-    const prevDate = calendar.getPrevious({
-      month: dateState.month,
-      year: dateState.year,
-      date,
-    });
+    const prevDate = calendar.getPrevious(dateState);
 
     if (minDate) {
       if (
@@ -103,19 +95,11 @@ const Calendar: FC<CalendarProps> = ({
         return;
       }
     }
-    setDateState({
-      current: dateState.current,
-      month: prevDate.month,
-      year: prevDate.year,
-    });
+    setDateState(prevDate);
   };
 
   const handleNext = (): void => {
-    const nextDate = calendar.getNext({
-      month: dateState.month,
-      year: dateState.year,
-      date,
-    });
+    const nextDate = calendar.getNext(dateState);
 
     if (maxDate) {
       if (
@@ -131,11 +115,17 @@ const Calendar: FC<CalendarProps> = ({
         return;
       }
     }
-    setDateState({
-      current: dateState.current,
-      month: nextDate.month,
-      year: nextDate.year,
-    });
+    setDateState(nextDate);
+  };
+
+  const getCalendarDates = (): Array<Array<string | number>> => {
+    // debugger;
+    // const { date, month, year } = dateState;
+    // const calendarMonth = month || +date.getMonth() + 1;
+    // const calendarYear = year || date.getFullYear();
+
+    return calendar.getDateArr(dateState);
+    // return calendar.getDateArr(calendarMonth, calendarYear);
   };
 
   const getDaysOfTheWeek = (): React.JSX.Element[] => {
@@ -166,7 +156,7 @@ const Calendar: FC<CalendarProps> = ({
       </CalendarControlsWrapper>
       <DaysWrapper>{getDaysOfTheWeek()}</DaysWrapper>
       <MonthGrid
-        date={date}
+        date={currentDate}
         displayedDate={dateState.month}
         dateArr={getCalendarDates()}
         onClick={onChange}

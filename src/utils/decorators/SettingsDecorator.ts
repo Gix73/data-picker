@@ -8,13 +8,6 @@ export class SettingsDecorator {
       settings;
     const calendar = new DefaultCalendar();
 
-    if (type === "week") {
-      const weekCalc = new WeekCalendar();
-      calendar.getNext = weekCalc.getNext;
-      calendar.getPrevious = weekCalc.getPrevious;
-      calendar.getDateArr = weekCalc.getDateArr;
-    }
-
     if (weekStart === "mo") {
       calendar.weekStart = "mo";
     } else {
@@ -43,6 +36,10 @@ export class SettingsDecorator {
       calendar.showWeekends = true;
     } else {
       calendar.showWeekends = false;
+    }
+
+    if (type === "week") {
+      WeekCalendar(calendar);
     }
 
     return calendar;

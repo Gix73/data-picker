@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { CALENDAR_WEEKS } from "../../constants/date";
 import { type ICalendar } from "../../types/types";
 import {
@@ -41,10 +42,16 @@ export class DefaultCalendar implements ICalendar {
   public getDateArr({ month, year }: State): Array<Array<string | number>> {
     const monthDays = getNumberOfMonthDays(month, year);
     const monthFirstDay = getMonthFirstDay(month, year);
-
     let daysFromPrevMonth: number;
     if (this.weekStart === "mo") {
       daysFromPrevMonth = monthFirstDay - 2;
+      if (daysFromPrevMonth === -1) {
+        if (monthFirstDay === 1) {
+          daysFromPrevMonth = 6;
+        } else {
+          daysFromPrevMonth = 1;
+        }
+      }
     } else {
       daysFromPrevMonth = monthFirstDay - 1;
     }
@@ -56,7 +63,7 @@ export class DefaultCalendar implements ICalendar {
     const nextData = this.getNext({ month, year });
 
     const prevMonthDays = getNumberOfMonthDays(prevData.month, prevData.year);
-
+    // ...new Array(daysFromPrevMonth !== -1 ? daysFromPrevMonth : 0)
     const prevMonthDates = [...new Array(daysFromPrevMonth)].map((n, index) => {
       const day = index + 1 + (prevMonthDays - daysFromPrevMonth);
       return [prevData.year, zeroPad(prevData.month, 2), zeroPad(day, 2)];
@@ -73,5 +80,16 @@ export class DefaultCalendar implements ICalendar {
     });
 
     return [...prevMonthDates, ...thisMonthDates, ...nextMonthDates];
+  }
+
+  public getDateInfo(date?: Date): State {
+    if (!date) {
+      date = new Date();
+    }
+    const info = {
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
+    };
+    return info;
   }
 }

@@ -18,7 +18,6 @@ const MonthGrid: FC<MonthGridProps> = ({
     () => dateArr.map((e, i) => new Date(e.join("/"))),
     [dateArr]
   );
-
   return (
     <Grid>
       {monthDateArr.map((e, i) => {
