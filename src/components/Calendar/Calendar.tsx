@@ -12,7 +12,10 @@ import {
 import prev from "../../assets/Prev.svg";
 import next from "../../assets/Next.svg";
 import { type CalendarProps } from "./types";
-import { isDate } from "../../utils/helpers/calendarHelper";
+import {
+  getCurrentWeekNumber,
+  isDate,
+} from "../../utils/helpers/calendarHelper";
 import { DefaultCalendar } from "../../utils/decorators/DefaultCalendar";
 import MonthGrid from "../MonthGrid/MonthGrid";
 import { CALENDAR_MONTHS, WEEK_DAYS } from "../../constants/date";
@@ -51,24 +54,12 @@ const Calendar: FC<CalendarProps> = ({
       type,
     });
     setCalendar(decoratedCalendar);
+    setDateState(decoratedCalendar.getDateInfo(currentDate));
   }, [minDate, maxDate, showWeekends, weekStart, withTodo, type]);
 
-  // const addDateToState = (current: Date): void => {
-  //   const isDateObject = isDate(current);
-  //   const curDate = isDateObject ? current : new Date();
-  //   setDateState({
-  //     date: curDate,
-  //     month: +curDate.getMonth() + 1,
-  //     year: curDate.getFullYear(),
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   setDateState({
-  //     month: currentDate.getMonth() + 1,
-  //     year: currentDate.getFullYear(),
-  //   });
-  // }, [currentDate]);
+  useEffect(() => {
+    setDateState(calendar.getDateInfo(currentDate));
+  }, [currentDate]);
 
   const monthname = useMemo(
     () =>
@@ -119,13 +110,7 @@ const Calendar: FC<CalendarProps> = ({
   };
 
   const getCalendarDates = (): Array<Array<string | number>> => {
-    // debugger;
-    // const { date, month, year } = dateState;
-    // const calendarMonth = month || +date.getMonth() + 1;
-    // const calendarYear = year || date.getFullYear();
-
     return calendar.getDateArr(dateState);
-    // return calendar.getDateArr(calendarMonth, calendarYear);
   };
 
   const getDaysOfTheWeek = (): React.JSX.Element[] => {

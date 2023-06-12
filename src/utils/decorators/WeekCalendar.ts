@@ -97,6 +97,7 @@ export const WeekCalendar = (calendar: ICalendar): void => {
     });
 
     const data = [...prevMonthDates, ...thisMonthDates, ...nextMonthDates];
+
     return data.slice(week * 7, week * 7 + 7);
   }
 
@@ -106,11 +107,13 @@ export const WeekCalendar = (calendar: ICalendar): void => {
     if (!date) {
       date = new Date();
     }
+
     const info = {
       month: date.getMonth() + 1,
       year: date.getFullYear(),
-      week: getCurrentWeekNumber(date, date.getMonth(), date.getFullYear()),
+      week: getCurrentWeekNumber(date, date.getMonth() + 1, date.getFullYear()),
     };
+
     return info;
   };
 };

@@ -17,6 +17,7 @@ Default.args = {
   maxDate: new Date(2025, 5, 20),
   showWeekends: true,
   withTodo: true,
+  type: "month",
 };
 
 export default story;

@@ -90,5 +90,5 @@ export function getCurrentWeekNumber(
   month: number,
   year: number
 ): number {
-  return Math.ceil((date.getDate() + getMonthFirstDay(month, year)) / 7);
+  return Math.ceil((date.getDate() + getMonthFirstDay(month, year)) / 7) - 1;
 }
