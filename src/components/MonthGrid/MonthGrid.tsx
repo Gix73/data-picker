@@ -1,4 +1,4 @@
-import React, { useMemo, type FC } from "react";
+import React, { useMemo, type FC, memo } from "react";
 import { Grid } from "./styled";
 import Day from "../Day/Day";
 import Colors from "../../constants/colors";
@@ -41,4 +41,4 @@ const MonthGrid: FC<MonthGridProps> = ({
   );
 };
 
-export default MonthGrid;
+export default memo(MonthGrid);

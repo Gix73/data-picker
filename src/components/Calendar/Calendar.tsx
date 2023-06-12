@@ -20,6 +20,9 @@ import { DefaultCalendar } from "../../utils/decorators/DefaultCalendar";
 import MonthGrid from "../MonthGrid/MonthGrid";
 import { CALENDAR_MONTHS, WEEK_DAYS } from "../../constants/date";
 import { SettingsDecorator } from "../../utils/decorators/SettingsDecorator";
+import YearControls from "../YearControls/YearPanel";
+import MonthPanel from "../MonthPanel/MonthPanel";
+import YearPanel from "../YearPanel/YearPanel";
 
 const Calendar: FC<CalendarProps> = ({
   currentDate,
@@ -43,6 +46,18 @@ const Calendar: FC<CalendarProps> = ({
   );
 
   const [dateState, setDateState] = useState(calendar.getDateInfo(currentDate));
+  const [showPopup, setShowPopup] = useState(false);
+  const [showYear, setShowYear] = useState(false);
+
+  const handleMonth = (): void => {
+    setShowPopup(!showPopup);
+    setShowYear(false);
+  };
+
+  const handleYear = (): void => {
+    setShowYear(!showYear);
+    setShowPopup(false);
+  };
 
   useEffect(() => {
     const decoratedCalendar = new SettingsDecorator().setCalendarSettings({
@@ -129,15 +144,26 @@ const Calendar: FC<CalendarProps> = ({
   return (
     <CalendarWrapper>
       <CalendarControlsWrapper>
-        <ImgWrapper onClick={handlePrevious}>
-          <Img src={prev} alt="prev" />
-        </ImgWrapper>
-        <Title>
-          {monthname} {dateState.year}
-        </Title>
-        <ImgWrapper onClick={handleNext}>
-          <Img src={next} alt="next" />
-        </ImgWrapper>
+        {type === "year" ? (
+          <YearControls
+            month={monthname}
+            year={dateState.year}
+            onMonthShow={handleMonth}
+            onYearsShow={handleYear}
+          />
+        ) : (
+          <>
+            <ImgWrapper onClick={handlePrevious}>
+              <Img src={prev} alt="prev" />
+            </ImgWrapper>
+            <Title>
+              {monthname} {dateState.year}
+            </Title>
+            <ImgWrapper onClick={handleNext}>
+              <Img src={next} alt="next" />
+            </ImgWrapper>
+          </>
+        )}
       </CalendarControlsWrapper>
       <DaysWrapper>{getDaysOfTheWeek()}</DaysWrapper>
       <MonthGrid
@@ -149,6 +175,16 @@ const Calendar: FC<CalendarProps> = ({
         maxDate={calendar.maxDate}
         showWeekends={calendar.showWeekends}
       />
+      {showPopup && (
+        <MonthPanel
+          onClick={onChange}
+          onShow={handleMonth}
+          date={currentDate}
+        />
+      )}
+      {showYear && (
+        <YearPanel onClick={onChange} onShow={handleYear} date={currentDate} />
+      )}
     </CalendarWrapper>
   );
 };
