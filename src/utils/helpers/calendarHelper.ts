@@ -88,7 +88,20 @@ export function isDateGreater(firstDate: Date, secondDate: Date): boolean {
 export function getCurrentWeekNumber(
   date: Date,
   month: number,
-  year: number
+  year: number,
+  weekStart: "mo" | "su" | undefined
 ): number {
+  console.log(weekStart);
+  if (weekStart === "su") {
+    return (
+      Math.ceil((date.getDate() + getMonthFirstDay(month, year) - 1) / 7) - 1
+    );
+  }
+  if (weekStart === "mo") {
+    return (
+      Math.ceil((date.getDate() + getMonthFirstDay(month, year) - 2) / 7) - 1
+    );
+  }
+
   return Math.ceil((date.getDate() + getMonthFirstDay(month, year)) / 7) - 1;
 }

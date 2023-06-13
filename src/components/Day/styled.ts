@@ -10,6 +10,7 @@ interface Props {
   $isCurrentMonth: boolean;
   $isWeekday: boolean | undefined;
   $haveTodo: boolean;
+  $isHoliday: boolean;
 }
 
 export const DayWrapper = styled.div<Props>`
@@ -17,6 +18,9 @@ export const DayWrapper = styled.div<Props>`
   background-color: ${(props) => {
     if (props.$isSelected) {
       return Colors.BLUE;
+    }
+    if (props.$isHoliday) {
+      return "#A6EC87";
     }
     return Colors.WHITE;
   }};

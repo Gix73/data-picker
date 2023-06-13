@@ -111,7 +111,12 @@ export const WeekCalendar = (calendar: ICalendar): void => {
     const info = {
       month: date.getMonth() + 1,
       year: date.getFullYear(),
-      week: getCurrentWeekNumber(date, date.getMonth() + 1, date.getFullYear()),
+      week: getCurrentWeekNumber(
+        date,
+        date.getMonth() + 1,
+        date.getFullYear(),
+        calendar.weekStart
+      ),
     };
 
     return info;

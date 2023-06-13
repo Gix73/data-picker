@@ -9,6 +9,7 @@ import ToDo from "../ToDo/ToDo";
 import { type DayPropsI } from "./types";
 import { getItemFromLocalStorage } from "../../utils/helpers/localStorage";
 import { type ToDoState } from "../ToDo/types";
+import { HOLIDAYS } from "../../constants/date";
 
 const Day: FC<DayPropsI> = ({
   date,
@@ -28,10 +29,17 @@ const Day: FC<DayPropsI> = ({
   const haveTodo = getItemFromLocalStorage(
     String(date.getTime())
   ) as ToDoState[];
+
   const isSelected = isSameDay(date, selectedDate);
   const isCurrentMonth = date.getMonth() === displayedDate - 1;
   const isWeekday =
     (date.getDay() === 0 || date.getDay() === 6) && showWeekends;
+  const isHoliday = HOLIDAYS.reduce((acc, e): boolean => {
+    if (e.day === date.getDate() && e.month === date.getMonth() + 1) {
+      return true;
+    }
+    return acc;
+  }, false);
 
   const handlePopup = (): void => {
     setShowPopup(!showPopup);
@@ -58,6 +66,7 @@ const Day: FC<DayPropsI> = ({
         $isSelected={isSelected}
         $isCurrentMonth={isCurrentMonth}
         $isWeekday={isWeekday}
+        $isHoliday={isHoliday}
         $haveTodo={haveTodo.length > 0}
       >
         <Data>{date.getDate()}</Data>
