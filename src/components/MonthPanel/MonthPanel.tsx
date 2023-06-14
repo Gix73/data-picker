@@ -1,6 +1,6 @@
 import React, { type FC } from "react";
 import { Grid } from "./styled";
-import { CALENDAR_MONTHS } from "../../constants/date";
+import { CALENDAR_MONTHS } from "@/constants/date";
 import { type MonthPanelProps } from "./types";
 import MonthCell from "./MonthCell/MonthCell";
 

@@ -9,20 +9,15 @@ import {
   Title,
 } from "./styled";
 
-import prev from "../../assets/Prev.svg";
-import next from "../../assets/Next.svg";
+import prev from "@/assets/Prev.svg";
+import next from "@/assets/Next.svg";
 import { type CalendarProps } from "./types";
-import {
-  getCurrentWeekNumber,
-  isDate,
-} from "../../utils/helpers/calendarHelper";
-import { DefaultCalendar } from "../../utils/decorators/DefaultCalendar";
 import MonthGrid from "../MonthGrid/MonthGrid";
-import { CALENDAR_MONTHS, WEEK_DAYS } from "../../constants/date";
-import { SettingsDecorator } from "../../utils/decorators/SettingsDecorator";
-import YearControls from "../YearControls/YearPanel";
-import MonthPanel from "../MonthPanel/MonthPanel";
-import YearPanel from "../YearPanel/YearPanel";
+import { CALENDAR_MONTHS, WEEK_DAYS } from "@/constants/date";
+import { SettingsDecorator } from "@/utils/decorators/SettingsDecorator";
+import YearControls from "@/components/YearControls/YearPanel";
+import MonthPanel from "@/components/MonthPanel/MonthPanel";
+import YearPanel from "@/components/YearPanel/YearPanel";
 
 const Calendar: FC<CalendarProps> = ({
   currentDate,
@@ -36,6 +31,8 @@ const Calendar: FC<CalendarProps> = ({
   startDate,
   endDate,
   holidays,
+  defaultColor,
+  holidayColor,
 }) => {
   const [calendar, setCalendar] = useState(
     new SettingsDecorator().setCalendarSettings({
@@ -196,6 +193,8 @@ const Calendar: FC<CalendarProps> = ({
         endDate={calendar.endDate}
         showWeekends={calendar.showWeekends}
         holidays={calendar.holidays}
+        holidayColor={holidayColor}
+        defaultColor={defaultColor}
       />
       {showMonth && (
         <MonthPanel

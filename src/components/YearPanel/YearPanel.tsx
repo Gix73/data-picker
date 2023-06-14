@@ -1,8 +1,8 @@
 import React, { type FC } from "react";
 import { type YearPanelProps } from "./types";
-import { YEARS } from "../../constants/date";
+import { YEARS } from "@/constants/date";
 import { Grid } from "./styed";
-import Year from "../Year/Year";
+import Year from "@/components/Year/Year";
 
 const YearPanel: FC<YearPanelProps> = ({ onClick, date, onShow }) => {
   const generateGrid = (): React.JSX.Element[] => {

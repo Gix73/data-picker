@@ -52,6 +52,7 @@
       "react/require-default-props": "off",
       "no-plusplus": "off",
       "class-methods-use-this": "off",
+      "import/no-unresolved": "off",
       "@typescript-eslint/strict-boolean-expressions": [
         "warn",
         {
@@ -73,7 +74,7 @@
         ],
       "object-curly-newline": 0,
       "import/extensions": [
-          "error",
+          "off",
           "ignorePackages",
           {
             "js": "never",

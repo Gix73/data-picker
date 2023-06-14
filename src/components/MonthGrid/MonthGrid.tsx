@@ -1,8 +1,8 @@
 import React, { useMemo, type FC, memo } from "react";
 import { Grid } from "./styled";
-import Day from "../Day/Day";
-import Colors from "../../constants/colors";
-import Borders from "../../constants/borders";
+import Day from "@/components/Day/Day";
+import Colors from "@/constants/colors";
+import Borders from "@/constants/borders";
 import { type MonthGridProps } from "./types";
 
 const MonthGrid: FC<MonthGridProps> = ({
@@ -16,6 +16,8 @@ const MonthGrid: FC<MonthGridProps> = ({
   startDate,
   endDate,
   holidays,
+  holidayColor,
+  defaultColor,
 }) => {
   const monthDateArr = useMemo(
     () => dateArr.map((e, i) => new Date(e.join("/"))),
@@ -40,6 +42,8 @@ const MonthGrid: FC<MonthGridProps> = ({
             startDate={startDate}
             endDate={endDate}
             holidays={holidays}
+            holidayColor={holidayColor}
+            defaultColor={defaultColor}
           />
         );
       })}

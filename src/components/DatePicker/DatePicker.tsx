@@ -1,10 +1,10 @@
-import React, { useState, type FC, useEffect } from "react";
+import React, { useState, type FC } from "react";
 import { Span, Wrapper } from "./styled";
-import { Global } from "../../styles/globalStyled";
-import ChooseDate from "../ChooseDate/ChooseDate";
-import Calendar from "../Calendar/Calendar";
+import { Global } from "@/styles/globalStyled";
+import ChooseDate from "@/components/ChooseDate/ChooseDate";
+import Calendar from "@/components/Calendar/Calendar";
 import { type DatePickerProps } from "./types";
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import ErrorBoundary from "@/components/ErrorBoundary/ErrorBoundary";
 
 const DatePicker: FC<DatePickerProps> = ({
   type,
@@ -17,6 +17,8 @@ const DatePicker: FC<DatePickerProps> = ({
   endDate,
   title,
   holidays,
+  defaultColor,
+  holidayColor,
   onChange,
 }) => {
   const [date, setDate] = useState(new Date());
@@ -61,6 +63,8 @@ const DatePicker: FC<DatePickerProps> = ({
             withTodo={withTodo}
             type={type}
             holidays={holidays}
+            defaultColor={defaultColor}
+            holidayColor={holidayColor}
           />
         )}
       </Wrapper>

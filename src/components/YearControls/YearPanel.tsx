@@ -1,7 +1,7 @@
 import React, { type FC } from "react";
 import { Arrow, MonthSelect, PanelWrapper, YearSelect } from "./styled";
 import { type YearPanelProps } from "./types";
-import arrow from "../../assets/arrow.svg";
+import arrow from "@/assets/arrow.svg";
 
 const YearControls: FC<YearPanelProps> = ({
   month,

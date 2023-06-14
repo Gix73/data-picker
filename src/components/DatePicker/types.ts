@@ -9,5 +9,7 @@ export interface DatePickerProps {
   endDate?: Date;
   title?: string;
   holidays?: Array<{ month: number; day: number }>;
+  defaultColor?: string;
+  holidayColor?: string;
   onChange: (value: Date) => void;
 }

@@ -15,19 +15,21 @@ interface Props {
   $isEndDate: boolean;
   $isBetween: boolean;
   $isActive: boolean;
+  $defaultColor?: string;
+  $holidayColor?: string;
 }
 
 export const DayWrapper = styled.div<Props>`
   display: flex;
   background-color: ${(props) => {
     if (props.$isSelected || props.$isStartDate || props.$isEndDate) {
-      return Colors.BLUE;
+      return props.$defaultColor ? props.$defaultColor : Colors.BLUE;
     }
     if (props.$isBetween) {
       return Colors.LIGHT_BLUE;
     }
     if (props.$isHoliday) {
-      return "#A6EC8782";
+      return props.$holidayColor ? props.$holidayColor : Colors.GREEN;
     }
     return Colors.WHITE;
   }};

@@ -7,12 +7,11 @@ import {
   isSameDate,
   isSameDay,
   isValidDate,
-} from "../../utils/helpers/calendarHelper";
-import ToDo from "../ToDo/ToDo";
+} from "@/utils/helpers/calendarHelper";
+import ToDo from "@/components/ToDo/ToDo";
 import { type DayPropsI } from "./types";
-import { getItemFromLocalStorage } from "../../utils/helpers/localStorage";
-import { type ToDoState } from "../ToDo/types";
-import { HOLIDAYS } from "../../constants/date";
+import { getItemFromLocalStorage } from "@/utils/helpers/localStorage";
+import { type ToDoState } from "@/components/ToDo/types";
 
 const Day: FC<DayPropsI> = ({
   date,
@@ -29,6 +28,8 @@ const Day: FC<DayPropsI> = ({
   startDate,
   showWeekends,
   holidays,
+  holidayColor,
+  defaultColor,
   onClick,
 }: DayPropsI) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -83,6 +84,8 @@ const Day: FC<DayPropsI> = ({
         $isEndDate={isEndDate}
         $isBetween={isBetween}
         $isActive={isActive}
+        $defaultColor={defaultColor}
+        $holidayColor={holidayColor}
         $haveTodo={haveTodo.length > 0}
       >
         <Data>{date.getDate()}</Data>

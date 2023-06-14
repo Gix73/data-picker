@@ -7,7 +7,7 @@ import {
   Span,
   TodoContainer,
 } from "./styled";
-import trash from "../../assets/trash.svg";
+import trash from "@/assets/trash.svg";
 
 const TodoCell: FC<TodoCellProps> = ({ todo, onCheck, onDelete }) => {
   const handleChange = (): void => {

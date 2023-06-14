@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { type FC } from "react";
 import { Button, Container, Icon, Input } from "./styled";
 import { type ChooseDateProps } from "./types";
-import { isDateValid } from "../../utils/helpers/calendarHelper";
-import calendarIcon from "../../assets/Calendar.svg";
+import { isDateValid } from "@/utils/helpers/calendarHelper";
+import calendarIcon from "@/assets/Calendar.svg";
 
 const ChooseDate: FC<ChooseDateProps> = ({
   handleChange,

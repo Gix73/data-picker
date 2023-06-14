@@ -13,5 +13,7 @@ export interface DayPropsI {
   endDate?: Date | null;
   showWeekends?: boolean;
   holidays?: Array<{ month: number; day: number }>;
+  defaultColor?: string;
+  holidayColor?: string;
   onClick: (newDate: Date) => void;
 }

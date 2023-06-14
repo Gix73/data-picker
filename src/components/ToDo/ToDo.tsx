@@ -2,12 +2,12 @@ import React, { useEffect, useMemo } from "react";
 import { useState, type FC } from "react";
 import { CloseBtn, ListWrapper, ToDoWrapper } from "./styled";
 import { type ToDoState, type ToDoProps } from "./types";
-import InputTodo from "../InputTodo/InputTodo";
+import InputTodo from "@/components/InputTodo/InputTodo";
 import {
   getItemFromLocalStorage,
   setItemToLocalStorage,
-} from "../../utils/helpers/localStorage";
-import TodoCell from "../TodoCell/TodoCell";
+} from "@/utils/helpers/localStorage";
+import TodoCell from "@/components/TodoCell/TodoCell";
 
 const ToDo: FC<ToDoProps> = ({ onShow, date }) => {
   const [todoList, setTodoList] = useState([] as ToDoState[]);

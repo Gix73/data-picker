@@ -1,7 +1,7 @@
 import React, { useState, type FC } from "react";
 import { RangeContainer } from "./styled";
-import DatePicker from "../DatePicker/DatePicker";
-import { type DatePickerProps } from "../DatePicker/types";
+import DatePicker from "@/components/DatePicker/DatePicker";
+import { type DatePickerProps } from "@/components/DatePicker/types";
 
 const RangePicker: FC<DatePickerProps> = ({
   type,

@@ -9,4 +9,6 @@ export interface MonthGridProps {
   startDate?: Date | null;
   endDate?: Date | null;
   holidays?: Array<{ month: number; day: number }>;
+  defaultColor?: string;
+  holidayColor?: string;
 }

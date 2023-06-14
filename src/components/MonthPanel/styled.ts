@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import Colors from "../../constants/colors";
 
 export const Grid = styled.div`
   position: absolute;
