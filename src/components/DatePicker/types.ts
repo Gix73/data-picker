@@ -5,4 +5,8 @@ export interface DatePickerProps {
   showWeekends?: boolean;
   weekStart?: "su" | "mo";
   withTodo?: boolean;
+  startDate?: Date;
+  endDate?: Date;
+  title?: string;
+  onChange: (value: Date) => void;
 }

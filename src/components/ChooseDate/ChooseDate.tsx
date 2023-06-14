@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { type FC } from "react";
-import { Container, Input } from "./styled";
+import { Button, Container, Icon, Input } from "./styled";
 import { type ChooseDateProps } from "./types";
 import { isDateValid } from "../../utils/helpers/calendarHelper";
+import calendarIcon from "../../assets/Calendar.svg";
 
 const ChooseDate: FC<ChooseDateProps> = ({
   handleChange,
   date,
   minDate,
   maxDate,
+  handleShow,
 }) => {
   const [inputValue, setInputValue] = useState(date);
+  // const [valid, setValid] = useState(false);
 
   useEffect(() => {
     setInputValue(date);
@@ -33,7 +36,7 @@ const ChooseDate: FC<ChooseDateProps> = ({
     if (isDateValid(inputStr)) {
       const newDate = inputStr.replace(/(\d+[/])(\d+[/])/, "$2$1");
       const updatedDate = new Date(newDate);
-      let isValid;
+      let isValid = false;
       if (minDate && maxDate) {
         isValid =
           updatedDate.getTime() >=
@@ -45,6 +48,7 @@ const ChooseDate: FC<ChooseDateProps> = ({
               ? maxDate.getTime()
               : new Date(maxDate).getTime());
       }
+      // setValid(isValid);
       if (isValid) {
         handleChange(new Date(newDate));
       } else {
@@ -61,7 +65,11 @@ const ChooseDate: FC<ChooseDateProps> = ({
         value={inputValue}
         maxLength={10}
         onChange={onChange}
+        $isValid={false}
       />
+      <Button>
+        <Icon src={calendarIcon} alt="calendar" onClick={handleShow} />
+      </Button>
     </Container>
   );
 };

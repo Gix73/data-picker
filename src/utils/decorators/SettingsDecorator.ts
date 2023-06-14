@@ -4,8 +4,16 @@ import { WeekCalendar } from "./WeekCalendar";
 
 export class SettingsDecorator {
   setCalendarSettings(settings: ISettings): DefaultCalendar {
-    const { weekStart, withTodo, minDate, maxDate, showWeekends, type } =
-      settings;
+    const {
+      weekStart,
+      withTodo,
+      minDate,
+      maxDate,
+      showWeekends,
+      type,
+      startDate,
+      endDate,
+    } = settings;
     const calendar = new DefaultCalendar();
 
     if (weekStart === "mo") {
@@ -30,6 +38,18 @@ export class SettingsDecorator {
       calendar.maxDate = maxDate;
     } else {
       calendar.maxDate = null;
+    }
+
+    if (startDate) {
+      calendar.startDate = startDate;
+    } else {
+      calendar.startDate = null;
+    }
+
+    if (endDate) {
+      calendar.endDate = endDate;
+    } else {
+      calendar.endDate = null;
     }
 
     if (showWeekends) {

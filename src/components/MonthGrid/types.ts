@@ -6,4 +6,6 @@ export interface MonthGridProps {
   minDate?: Date | null;
   maxDate?: Date | null;
   showWeekends?: boolean;
+  startDate?: Date | null;
+  endDate?: Date | null;
 }

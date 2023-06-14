@@ -9,6 +9,8 @@ export interface DayPropsI {
   height?: string;
   minDate?: Date | null;
   maxDate?: Date | null;
+  startDate?: Date | null;
+  endDate?: Date | null;
   showWeekends?: boolean;
   onClick: (newDate: Date) => void;
 }

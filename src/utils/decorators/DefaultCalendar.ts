@@ -27,6 +27,10 @@ export class DefaultCalendar implements ICalendar {
 
   public showWeekends?: boolean = true;
 
+  public startDate?: Date | null = null;
+
+  public endDate?: Date | null = null;
+
   public getPrevious({ month, year }: State): State {
     const prevMonth = month > 1 ? month - 1 : 12;
     const prevMonthYear = month > 1 ? year : year - 1;

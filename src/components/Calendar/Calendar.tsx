@@ -33,6 +33,8 @@ const Calendar: FC<CalendarProps> = ({
   weekStart,
   withTodo,
   type,
+  startDate,
+  endDate,
 }) => {
   const [calendar, setCalendar] = useState(
     new SettingsDecorator().setCalendarSettings({
@@ -42,21 +44,23 @@ const Calendar: FC<CalendarProps> = ({
       weekStart,
       withTodo,
       type,
+      startDate,
+      endDate,
     })
   );
 
   const [dateState, setDateState] = useState(calendar.getDateInfo(currentDate));
-  const [showPopup, setShowPopup] = useState(false);
+  const [showMonth, setShowMonth] = useState(false);
   const [showYear, setShowYear] = useState(false);
 
   const handleMonth = (): void => {
-    setShowPopup(!showPopup);
+    setShowMonth(!showMonth);
     setShowYear(false);
   };
 
   const handleYear = (): void => {
     setShowYear(!showYear);
-    setShowPopup(false);
+    setShowMonth(false);
   };
 
   useEffect(() => {
@@ -67,10 +71,21 @@ const Calendar: FC<CalendarProps> = ({
       weekStart,
       withTodo,
       type,
+      startDate,
+      endDate,
     });
     setCalendar(decoratedCalendar);
     setDateState(decoratedCalendar.getDateInfo(currentDate));
-  }, [minDate, maxDate, showWeekends, weekStart, withTodo, type]);
+  }, [
+    minDate,
+    maxDate,
+    showWeekends,
+    weekStart,
+    withTodo,
+    type,
+    startDate,
+    endDate,
+  ]);
 
   useEffect(() => {
     setDateState(calendar.getDateInfo(currentDate));
@@ -173,9 +188,11 @@ const Calendar: FC<CalendarProps> = ({
         onClick={onChange}
         minDate={calendar.minDate}
         maxDate={calendar.maxDate}
+        startDate={calendar.startDate}
+        endDate={calendar.endDate}
         showWeekends={calendar.showWeekends}
       />
-      {showPopup && (
+      {showMonth && (
         <MonthPanel
           onClick={onChange}
           onShow={handleMonth}

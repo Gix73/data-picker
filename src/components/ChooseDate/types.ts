@@ -3,4 +3,7 @@ export interface ChooseDateProps {
   date: string;
   minDate?: Date;
   maxDate?: Date;
+  startDate?: Date;
+  endDate?: Date;
+  handleShow: () => void;
 }

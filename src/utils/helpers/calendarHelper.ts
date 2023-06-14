@@ -91,7 +91,6 @@ export function getCurrentWeekNumber(
   year: number,
   weekStart: "mo" | "su" | undefined
 ): number {
-  console.log(weekStart);
   if (weekStart === "su") {
     return (
       Math.ceil((date.getDate() + getMonthFirstDay(month, year) - 1) / 7) - 1
@@ -104,4 +103,27 @@ export function getCurrentWeekNumber(
   }
 
   return Math.ceil((date.getDate() + getMonthFirstDay(month, year)) / 7) - 1;
+}
+
+export function isSameDate(
+  date: Date | null | undefined,
+  newDate: Date | null | undefined
+): boolean {
+  return date?.getTime() === newDate?.getTime();
+}
+
+export function isInRange(
+  startDate: Date | null | undefined,
+  endDate: Date | null | undefined,
+  currentDate: Date | null | undefined
+): boolean {
+  if (startDate && endDate && currentDate) {
+    if (
+      currentDate.getTime() < endDate.getTime() &&
+      currentDate.getTime() > startDate.getTime()
+    ) {
+      return true;
+    }
+  }
+  return false;
 }

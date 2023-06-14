@@ -11,21 +11,32 @@ interface Props {
   $isWeekday: boolean | undefined;
   $haveTodo: boolean;
   $isHoliday: boolean;
+  $isStartDate: boolean;
+  $isEndDate: boolean;
+  $isBetween: boolean;
 }
 
 export const DayWrapper = styled.div<Props>`
   display: flex;
   background-color: ${(props) => {
-    if (props.$isSelected) {
+    if (props.$isSelected || props.$isStartDate || props.$isEndDate) {
       return Colors.BLUE;
     }
+    if (props.$isBetween) {
+      return Colors.LIGHT_BLUE;
+    }
     if (props.$isHoliday) {
-      return "#A6EC87";
+      return "#A6EC8782";
     }
     return Colors.WHITE;
   }};
   color: ${(props) => {
-    if (props.$isSelected) {
+    if (
+      props.$isSelected ||
+      props.$isStartDate ||
+      props.$isEndDate ||
+      props.$isBetween
+    ) {
       return Colors.WHITE;
     }
     if (props.$isCurrentMonth) {
@@ -44,7 +55,21 @@ export const DayWrapper = styled.div<Props>`
   height: 32px;
   font-size: 13px;
   border: ${(props) => (props.$haveTodo ? "1px solid" : "none")};
-  border-radius: ${Borders.ROUNDED};
+  border-radius: ${(props) => {
+    if (props.$isStartDate) {
+      return Borders.LEFT;
+    }
+    if (props.$isEndDate) {
+      return Borders.RIGHT;
+    }
+    if (props.$isSelected) {
+      return Borders.ROUNDED;
+    }
+    if (props.$isBetween) {
+      return Borders.DEFAULT;
+    }
+    return Borders.ROUNDED;
+  }};
   cursor: pointer;
 `;
 

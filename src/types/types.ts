@@ -7,6 +7,8 @@ export interface ISettings {
   minDate?: Date | null;
   maxDate?: Date | null;
   showWeekends?: boolean;
+  startDate?: Date | null;
+  endDate?: Date | null;
 }
 export interface ICalendar extends ISettings {
   getPrevious: (state: State) => object;

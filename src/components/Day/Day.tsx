@@ -3,6 +3,8 @@ import { Data, DayWrapper } from "./styled";
 import {
   isDateGreater,
   isDateLess,
+  isInRange,
+  isSameDate,
   isSameDay,
 } from "../../utils/helpers/calendarHelper";
 import ToDo from "../ToDo/ToDo";
@@ -22,6 +24,8 @@ const Day: FC<DayPropsI> = ({
   height,
   minDate,
   maxDate,
+  endDate,
+  startDate,
   showWeekends,
   onClick,
 }: DayPropsI) => {
@@ -40,6 +44,9 @@ const Day: FC<DayPropsI> = ({
     }
     return acc;
   }, false);
+  const isStartDate = isSameDate(date, startDate);
+  const isEndDate = isSameDate(date, endDate);
+  const isBetween = isInRange(startDate, endDate, date);
 
   const handlePopup = (): void => {
     setShowPopup(!showPopup);
@@ -67,6 +74,9 @@ const Day: FC<DayPropsI> = ({
         $isCurrentMonth={isCurrentMonth}
         $isWeekday={isWeekday}
         $isHoliday={isHoliday}
+        $isStartDate={isStartDate}
+        $isEndDate={isEndDate}
+        $isBetween={isBetween}
         $haveTodo={haveTodo.length > 0}
       >
         <Data>{date.getDate()}</Data>
