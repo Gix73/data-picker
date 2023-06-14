@@ -1,9 +1,9 @@
 import React, { useState, type FC } from "react";
 import { RangeContainer } from "./styled";
 import DatePicker from "@/components/DatePicker/DatePicker";
-import { type DatePickerProps } from "@/components/DatePicker/types";
+import { type RangePickerProps } from "./types";
 
-const RangePicker: FC<DatePickerProps> = ({
+const RangePicker: FC<RangePickerProps> = ({
   type,
   minDate,
   maxDate,

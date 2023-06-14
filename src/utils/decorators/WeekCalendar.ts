@@ -34,7 +34,7 @@ export const WeekCalendar = (calendar: ICalendar): void => {
     const { month, year, week } = state;
     const monthDays = getNumberOfMonthDays(month, year);
     const amountofWeeks = Math.floor(monthDays / 7);
-    if (week >= amountofWeeks) {
+    if (week !== undefined && week >= amountofWeeks) {
       const nextMonth = month < 12 ? month + 1 : 1;
       const nextMonthYear = month < 12 ? year : year + 1;
       return { month: nextMonth, year: nextMonthYear, week: 0 };
@@ -97,8 +97,10 @@ export const WeekCalendar = (calendar: ICalendar): void => {
     });
 
     const data = [...prevMonthDates, ...thisMonthDates, ...nextMonthDates];
-
-    return data.slice(week * 7, week * 7 + 7);
+    if (week !== undefined) {
+      return data.slice(week * 7, week * 7 + 7);
+    }
+    return data;
   }
 
   calendar.getDateArr = getDateArr;
