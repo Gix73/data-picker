@@ -8,4 +8,5 @@ export interface MonthGridProps {
   showWeekends?: boolean;
   startDate?: Date | null;
   endDate?: Date | null;
+  holidays?: Array<{ month: number; day: number }>;
 }

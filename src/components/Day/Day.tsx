@@ -6,6 +6,7 @@ import {
   isInRange,
   isSameDate,
   isSameDay,
+  isValidDate,
 } from "../../utils/helpers/calendarHelper";
 import ToDo from "../ToDo/ToDo";
 import { type DayPropsI } from "./types";
@@ -27,6 +28,7 @@ const Day: FC<DayPropsI> = ({
   endDate,
   startDate,
   showWeekends,
+  holidays,
   onClick,
 }: DayPropsI) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -38,14 +40,17 @@ const Day: FC<DayPropsI> = ({
   const isCurrentMonth = date.getMonth() === displayedDate - 1;
   const isWeekday =
     (date.getDay() === 0 || date.getDay() === 6) && showWeekends;
-  const isHoliday = HOLIDAYS.reduce((acc, e): boolean => {
-    if (e.day === date.getDate() && e.month === date.getMonth() + 1) {
-      return true;
-    }
-    return acc;
-  }, false);
+  const isHoliday = holidays
+    ? holidays.reduce((acc, e): boolean => {
+        if (e.day === date.getDate() && e.month === date.getMonth() + 1) {
+          return true;
+        }
+        return acc;
+      }, false)
+    : false;
   const isStartDate = isSameDate(date, startDate);
   const isEndDate = isSameDate(date, endDate);
+  const isActive = isValidDate(minDate, maxDate, date);
   const isBetween = isInRange(startDate, endDate, date);
 
   const handlePopup = (): void => {
@@ -77,6 +82,7 @@ const Day: FC<DayPropsI> = ({
         $isStartDate={isStartDate}
         $isEndDate={isEndDate}
         $isBetween={isBetween}
+        $isActive={isActive}
         $haveTodo={haveTodo.length > 0}
       >
         <Data>{date.getDate()}</Data>

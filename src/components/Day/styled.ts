@@ -14,6 +14,7 @@ interface Props {
   $isStartDate: boolean;
   $isEndDate: boolean;
   $isBetween: boolean;
+  $isActive: boolean;
 }
 
 export const DayWrapper = styled.div<Props>`
@@ -39,7 +40,7 @@ export const DayWrapper = styled.div<Props>`
     ) {
       return Colors.WHITE;
     }
-    if (props.$isCurrentMonth) {
+    if (props.$isCurrentMonth && props.$isActive) {
       if (props.$isWeekday) {
         return Colors.RED;
       }

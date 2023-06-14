@@ -9,6 +9,7 @@ export interface ISettings {
   showWeekends?: boolean;
   startDate?: Date | null;
   endDate?: Date | null;
+  holidays?: Array<{ month: number; day: number }>;
 }
 export interface ICalendar extends ISettings {
   getPrevious: (state: State) => object;

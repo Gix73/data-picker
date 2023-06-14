@@ -23,9 +23,9 @@ export function getMonthFirstDay(month: number, year: number): number {
 
 export function isDate(date: Date): boolean {
   const isDateType = Object.prototype.toString.call(date) === "[object Date]";
-  const isValidDate = date && !Number.isNaN(date.valueOf());
+  const isValid = date && !Number.isNaN(date.valueOf());
 
-  return isDateType && isValidDate;
+  return isDateType && isValid;
 }
 
 export function isSameMonth(date: Date, basedate: Date = new Date()): boolean {
@@ -109,7 +109,9 @@ export function isSameDate(
   date: Date | null | undefined,
   newDate: Date | null | undefined
 ): boolean {
-  return date?.getTime() === newDate?.getTime();
+  const firstDate = typeof date === "number" ? new Date(date) : date;
+  const secondDate = typeof newDate === "number" ? new Date(newDate) : newDate;
+  return firstDate?.getTime() === secondDate?.getTime();
 }
 
 export function isInRange(
@@ -117,10 +119,36 @@ export function isInRange(
   endDate: Date | null | undefined,
   currentDate: Date | null | undefined
 ): boolean {
-  if (startDate && endDate && currentDate) {
+  const firstDate =
+    typeof startDate === "number" ? new Date(startDate) : startDate;
+  const secondDate = typeof endDate === "number" ? new Date(endDate) : endDate;
+  const curtDate =
+    typeof currentDate === "number" ? new Date(currentDate) : currentDate;
+  if (firstDate && secondDate && curtDate) {
     if (
-      currentDate.getTime() < endDate.getTime() &&
-      currentDate.getTime() > startDate.getTime()
+      curtDate.getTime() < secondDate.getTime() &&
+      curtDate.getTime() > firstDate.getTime()
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export function isValidDate(
+  startDate: Date | null | undefined,
+  endDate: Date | null | undefined,
+  currentDate: Date | null | undefined
+): boolean {
+  const firstDate =
+    typeof startDate === "number" ? new Date(startDate) : startDate;
+  const secondDate = typeof endDate === "number" ? new Date(endDate) : endDate;
+  const curtDate =
+    typeof currentDate === "number" ? new Date(currentDate) : currentDate;
+  if (firstDate && secondDate && curtDate) {
+    if (
+      curtDate.getTime() <= secondDate.getTime() &&
+      curtDate.getTime() >= firstDate.getTime()
     ) {
       return true;
     }

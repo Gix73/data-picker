@@ -15,6 +15,7 @@ const MonthGrid: FC<MonthGridProps> = ({
   showWeekends,
   startDate,
   endDate,
+  holidays,
 }) => {
   const monthDateArr = useMemo(
     () => dateArr.map((e, i) => new Date(e.join("/"))),
@@ -38,6 +39,7 @@ const MonthGrid: FC<MonthGridProps> = ({
             key={e.toDateString()}
             startDate={startDate}
             endDate={endDate}
+            holidays={holidays}
           />
         );
       })}

@@ -12,5 +12,6 @@ export interface DayPropsI {
   startDate?: Date | null;
   endDate?: Date | null;
   showWeekends?: boolean;
+  holidays?: Array<{ month: number; day: number }>;
   onClick: (newDate: Date) => void;
 }

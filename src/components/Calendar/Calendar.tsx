@@ -35,6 +35,7 @@ const Calendar: FC<CalendarProps> = ({
   type,
   startDate,
   endDate,
+  holidays,
 }) => {
   const [calendar, setCalendar] = useState(
     new SettingsDecorator().setCalendarSettings({
@@ -46,6 +47,7 @@ const Calendar: FC<CalendarProps> = ({
       type,
       startDate,
       endDate,
+      holidays,
     })
   );
 
@@ -73,6 +75,7 @@ const Calendar: FC<CalendarProps> = ({
       type,
       startDate,
       endDate,
+      holidays,
     });
     setCalendar(decoratedCalendar);
     setDateState(decoratedCalendar.getDateInfo(currentDate));
@@ -85,6 +88,7 @@ const Calendar: FC<CalendarProps> = ({
     type,
     startDate,
     endDate,
+    holidays,
   ]);
 
   useEffect(() => {
@@ -191,6 +195,7 @@ const Calendar: FC<CalendarProps> = ({
         startDate={calendar.startDate}
         endDate={calendar.endDate}
         showWeekends={calendar.showWeekends}
+        holidays={calendar.holidays}
       />
       {showMonth && (
         <MonthPanel

@@ -31,6 +31,8 @@ export class DefaultCalendar implements ICalendar {
 
   public endDate?: Date | null = null;
 
+  public holidays?: Array<{ month: number; day: number }> = undefined;
+
   public getPrevious({ month, year }: State): State {
     const prevMonth = month > 1 ? month - 1 : 12;
     const prevMonthYear = month > 1 ? year : year - 1;

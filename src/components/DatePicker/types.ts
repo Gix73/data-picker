@@ -8,5 +8,6 @@ export interface DatePickerProps {
   startDate?: Date;
   endDate?: Date;
   title?: string;
+  holidays?: Array<{ month: number; day: number }>;
   onChange: (value: Date) => void;
 }

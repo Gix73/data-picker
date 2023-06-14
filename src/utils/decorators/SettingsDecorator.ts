@@ -13,6 +13,7 @@ export class SettingsDecorator {
       type,
       startDate,
       endDate,
+      holidays,
     } = settings;
     const calendar = new DefaultCalendar();
 
@@ -56,6 +57,10 @@ export class SettingsDecorator {
       calendar.showWeekends = true;
     } else {
       calendar.showWeekends = false;
+    }
+
+    if (holidays) {
+      calendar.holidays = holidays;
     }
 
     if (type === "week") {

@@ -4,6 +4,7 @@ import { Global } from "../../styles/globalStyled";
 import ChooseDate from "../ChooseDate/ChooseDate";
 import Calendar from "../Calendar/Calendar";
 import { type DatePickerProps } from "./types";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 const DatePicker: FC<DatePickerProps> = ({
   type,
@@ -15,6 +16,7 @@ const DatePicker: FC<DatePickerProps> = ({
   startDate,
   endDate,
   title,
+  holidays,
   onChange,
 }) => {
   const [date, setDate] = useState(new Date());
@@ -33,7 +35,7 @@ const DatePicker: FC<DatePickerProps> = ({
   };
 
   return (
-    <>
+    <ErrorBoundary>
       <Global />
       <Wrapper>
         <Span>{title}</Span>
@@ -58,10 +60,11 @@ const DatePicker: FC<DatePickerProps> = ({
             weekStart={weekStart}
             withTodo={withTodo}
             type={type}
+            holidays={holidays}
           />
         )}
       </Wrapper>
-    </>
+    </ErrorBoundary>
   );
 };
 

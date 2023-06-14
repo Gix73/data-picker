@@ -7,7 +7,14 @@ import MonthCell from "./MonthCell/MonthCell";
 const MonthPanel: FC<MonthPanelProps> = ({ onClick, date, onShow }) => {
   const generateGrid = (): React.JSX.Element[] => {
     return Object.values(CALENDAR_MONTHS).map((e, i) => (
-      <MonthCell onClick={onClick} date={date} month={i} monthName={e} />
+      <MonthCell
+        // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        onClick={onClick}
+        date={date}
+        month={i}
+        monthName={e}
+      />
     ));
   };
 
