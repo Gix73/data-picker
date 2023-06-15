@@ -13,7 +13,6 @@ const ChooseDate: FC<ChooseDateProps> = ({
   handleShow,
 }) => {
   const [inputValue, setInputValue] = useState(date);
-  // const [valid, setValid] = useState(false);
 
   useEffect(() => {
     setInputValue(date);
@@ -48,7 +47,6 @@ const ChooseDate: FC<ChooseDateProps> = ({
               ? maxDate.getTime()
               : new Date(maxDate).getTime());
       }
-      // setValid(isValid);
       if (isValid) {
         handleChange(new Date(newDate));
       } else {

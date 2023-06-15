@@ -5,7 +5,6 @@ export const CalendarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* padding: 10px; */
   border: 1px solid #e1e1e1;
   border-radius: 8px;
 `;

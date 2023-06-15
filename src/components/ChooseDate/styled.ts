@@ -18,7 +18,6 @@ export const Input = styled.input<InputProps>`
   width: 100%;
   border: none;
   outline: none;
-  /* color: ${(props) => (props.$isValid ? "black" : "red")}; */
 `;
 
 export const Button = styled.button`

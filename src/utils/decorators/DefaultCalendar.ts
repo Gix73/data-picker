@@ -69,7 +69,7 @@ export class DefaultCalendar implements ICalendar {
     const nextData = this.getNext({ month, year });
 
     const prevMonthDays = getNumberOfMonthDays(prevData.month, prevData.year);
-    // ...new Array(daysFromPrevMonth !== -1 ? daysFromPrevMonth : 0)
+
     const prevMonthDates = [...new Array(daysFromPrevMonth)].map((n, index) => {
       const day = index + 1 + (prevMonthDays - daysFromPrevMonth);
       return [prevData.year, zeroPad(prevData.month, 2), zeroPad(day, 2)];
