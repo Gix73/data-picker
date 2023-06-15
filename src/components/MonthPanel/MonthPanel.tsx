@@ -18,7 +18,11 @@ const MonthPanel: FC<MonthPanelProps> = ({ onClick, date, onShow }) => {
     ));
   };
 
-  return <Grid onClick={onShow}>{generateGrid()}</Grid>;
+  return (
+    <Grid data-testid="monthPanel" onClick={onShow}>
+      {generateGrid()}
+    </Grid>
+  );
 };
 
 export default MonthPanel;

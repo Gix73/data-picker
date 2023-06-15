@@ -20,8 +20,6 @@ const Day: FC<DayPropsI> = ({
   borderRadius,
   selectedDate,
   displayedDate,
-  width,
-  height,
   minDate,
   maxDate,
   endDate,
@@ -71,6 +69,7 @@ const Day: FC<DayPropsI> = ({
   return (
     <>
       <DayWrapper
+        data-testid="day"
         onClick={handleClick}
         onDoubleClick={handlePopup}
         $bgColor={bgColor}

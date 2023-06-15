@@ -60,6 +60,7 @@ const ChooseDate: FC<ChooseDateProps> = ({
   return (
     <Container>
       <Input
+        data-testid="chooseDate"
         type="text"
         placeholder="Choose Date"
         value={inputValue}
@@ -68,7 +69,12 @@ const ChooseDate: FC<ChooseDateProps> = ({
         $isValid={false}
       />
       <Button>
-        <Icon src={calendarIcon} alt="calendar" onClick={handleShow} />
+        <Icon
+          data-testid="calendarBtn"
+          src={calendarIcon}
+          alt="calendar"
+          onClick={handleShow}
+        />
       </Button>
     </Container>
   );

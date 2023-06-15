@@ -11,11 +11,11 @@ const YearControls: FC<YearPanelProps> = ({
 }) => {
   return (
     <PanelWrapper>
-      <MonthSelect onClick={onMonthShow}>
+      <MonthSelect data-testid="monthSelect" onClick={onMonthShow}>
         {month}
         <Arrow src={arrow} alt="arrow" />
       </MonthSelect>
-      <YearSelect onClick={onYearsShow}>
+      <YearSelect data-testid="yearSelect" onClick={onYearsShow}>
         {year}
         <Arrow src={arrow} alt="arrow" />
       </YearSelect>

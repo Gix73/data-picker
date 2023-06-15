@@ -12,7 +12,11 @@ const YearPanel: FC<YearPanelProps> = ({ onClick, date, onShow }) => {
     ));
   };
 
-  return <Grid onClick={onShow}>{generateGrid()}</Grid>;
+  return (
+    <Grid data-testid="yearPanel" onClick={onShow}>
+      {generateGrid()}
+    </Grid>
+  );
 };
 
 export default YearPanel;

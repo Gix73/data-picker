@@ -15,7 +15,7 @@ import { type CalendarProps } from "./types";
 import MonthGrid from "../MonthGrid/MonthGrid";
 import { CALENDAR_MONTHS, WEEK_DAYS } from "@/constants/date";
 import { SettingsDecorator } from "@/utils/decorators/SettingsDecorator";
-import YearControls from "@/components/YearControls/YearPanel";
+import YearControls from "@/components/YearControls/YearControls";
 import MonthPanel from "@/components/MonthPanel/MonthPanel";
 import YearPanel from "@/components/YearPanel/YearPanel";
 
@@ -158,7 +158,7 @@ const Calendar: FC<CalendarProps> = ({
   };
 
   return (
-    <CalendarWrapper>
+    <CalendarWrapper data-testid="calendar">
       <CalendarControlsWrapper>
         {type === "year" ? (
           <YearControls
@@ -169,19 +169,19 @@ const Calendar: FC<CalendarProps> = ({
           />
         ) : (
           <>
-            <ImgWrapper onClick={handlePrevious}>
+            <ImgWrapper data-testid="prevbtn" onClick={handlePrevious}>
               <Img src={prev} alt="prev" />
             </ImgWrapper>
-            <Title>
+            <Title data-testid="datetitle">
               {monthname} {dateState.year}
             </Title>
-            <ImgWrapper onClick={handleNext}>
+            <ImgWrapper data-testid="nextbtn" onClick={handleNext}>
               <Img src={next} alt="next" />
             </ImgWrapper>
           </>
         )}
       </CalendarControlsWrapper>
-      <DaysWrapper>{getDaysOfTheWeek()}</DaysWrapper>
+      <DaysWrapper data-testid="weekdays">{getDaysOfTheWeek()}</DaysWrapper>
       <MonthGrid
         date={currentDate}
         displayedDate={dateState.month}
